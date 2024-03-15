@@ -1,28 +1,29 @@
 <template>
   <div class="hello">
     <GetDataFromFile  @GetArray="UpdateArray"/>
-    <div v-for="data, index in data_array"
-      :key="index"
-    >
+
+    
+    
        
-    </div>
     Data Array - {{ data_array }}
+    <button v-if="!sortStart" @click="sortStart=!sortStart"> Отсортировать </button>
+    <SortData v-else :dataGET="data_array"/>
   </div>
 </template>
 
 <script>
 import GetDataFromFile from './GetDataFromFile.vue';
+import SortData from './SortData.vue';
 export default {
   name: 'LAB1',
   components:{
-    GetDataFromFile
-  },
-  props: {
-    msg: String
+    GetDataFromFile,
+    SortData
   },
   data(){
     return{
       data_array: [],
+      sortStart: false
     }
   },
   methods: {
