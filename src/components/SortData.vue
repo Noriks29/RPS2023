@@ -1,14 +1,11 @@
 <template>
     <div class="SortData">
         <div class="divList">
-            <ul>
-                <li v-for="data, index in dataGET"
-                    :key="index"
-                >
+            <div v-for="data, index in dataGET"
+                :key="index"
+            >
                 {{ data }}
-                </li>
-            </ul>
-
+            </div>
         </div>
     </div>
 </template>
@@ -38,18 +35,16 @@ export default{
     flex-wrap: nowrap;
     align-items: center;
     .divList{
-        display: inline-block;
-
-        ul{
-            list-style-type: none;
-            
-            li{
-                padding: 10px;
-                border: 1px solid black;
-                border-radius: 14px;
-                background-color: rgb(72, 145, 96);
-            }
+        display: flex;
+        margin: 20px;
+        flex-wrap: wrap;
+        div{
+            padding: 10px;
+            border: 1px solid black;
+            border-radius: 14px;
+            background-color: rgb(72, 145, 96);
         }
     }
 }
+
 </style>
