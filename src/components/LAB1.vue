@@ -1,15 +1,24 @@
 <template>
-  <div class="hello">
-    <GetDataFromFile  @GetArray="UpdateArray"/>
-
+  <div>
+  <div class="menuflex">
+    <div class="GetDataDiv">
+      <GetDataFromFile  @GetArray="UpdateArray"/>
+    </div>
+    <div class="TreeDiv">
+      Data Array - {{ data_array }}
+      <button @click="SortDataArray(data_array)">Построить дерево</button>
+      <TreeComponent :Tree="DataTree" />
+    </div>
+    <div>
+      <button v-if="!sortStart" @click="GetTreeValue"> Отсортировать </button>
+      <SortData v-else :dataGET="DataSort"/>
+    </div>
     
-    
-       
-    Data Array - {{ data_array }}
-    <button @click="SortDataArray(data_array)">Построить дерево</button>
-    <TreeComponent :Tree="DataTree" />
-    <button v-if="!sortStart" @click="GetTreeValue"> Отсортировать </button>
-    <SortData v-else :dataGET="DataSort"/>
+  </div>
+  <div>
+    <button @click="ShowGraph = true">Отрисовать График</button>
+    <GrafComponent v-if="ShowGraph" :Data="data_array" :Data_Sort="DataSort"/>
+  </div>
   </div>
 </template>
 
@@ -18,6 +27,7 @@ import GetDataFromFile from './GetDataFromFile.vue';
 import SortData from './SortData.vue';
 import TreeComponent from './TreeComponent.vue'
 import {Tree} from '../js/tree.js'
+import GrafComponent from './GrafComponent.vue'
 
 
 export default {
@@ -25,14 +35,16 @@ export default {
   components:{
     GetDataFromFile,
     SortData,
-    TreeComponent
+    TreeComponent,
+    GrafComponent
   },
   data(){
     return{
       data_array: [],
       sortStart: false,
       DataTree: {},
-      DataSort: []
+      DataSort: [],
+      ShowGraph:false
     }
   },
   methods: {
@@ -60,6 +72,20 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+.menuflex{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 10px;
+  div{
+    flex: 1;
+  }
+  .GetDataDiv{
+    flex: 1;
+  }
+  .TreeDiv{
+    flex: 2
+  }
+}
 </style>

@@ -7,6 +7,7 @@
                 {{ data }}
             </div>
         </div>
+        <button>Сохранить</button>
     </div>
 </template>
 
@@ -40,6 +41,7 @@ export default{
         flex-wrap: wrap;
         div{
             padding: 10px;
+            margin-top: 3px;
             border: 1px solid black;
             border-radius: 14px;
             background-color: rgb(72, 145, 96);
