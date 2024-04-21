@@ -23,9 +23,14 @@
             <button v-if="!editing" @click="editing = !editing">
                 Редактировать
             </button>
-            <button v-else @click="SaveChange">
-                Сохранить
-            </button>
+            <div v-else>
+                <button @click="Add50RandomEl">
+                    Добавить 50 случайных элементов от -100 до 100
+                </button>
+                <button  @click="SaveChange">
+                    Сохранить
+                </button>
+            </div>
         </div>
     </div>
 </template>
@@ -67,10 +72,20 @@ export default{
         AddRow(){
             this.dataGET.push(0)
         },
-        ChangeData(e){
+        ChangeaDta(e){
             this.dataGET[e.target.id] = e.target.value
             //console.log(e.target.value, this.dataGET[e.target.id])
         },
+        Add50RandomEl(){
+            function randomNumber(min, max) {
+                return Math.floor(Math.random() * (max - min) + min);
+            }
+            
+            for (let index = 0; index < 50; index++) {
+                this.dataGET.push(randomNumber(1, 200) - 100)
+                
+            }
+        }
     }
 }
 
@@ -81,12 +96,17 @@ export default{
 
 .GetData{
 
+    max-height: 70vh;
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
     align-items: center;
+
     .divList{
         display: inline-block;
+        max-height: 70vh;
+        overflow-y: auto;
 
         ul{
             list-style-type: none;

@@ -29,11 +29,11 @@ export default {
   data() {
     return {
       chartData: {
-        labels: [ 'January', 'February', 'March' ],
+        labels: [  ],
         datasets: [ 
           { 
             label: 'Sort Data',
-            data: [40, 20, 12] 
+            data: [] 
           } 
         ]
       },

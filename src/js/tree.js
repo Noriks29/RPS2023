@@ -5,9 +5,6 @@ export class Tree{
         this.value = value
     }
 
-    sayHi(){
-        console.log(this.value)
-    }
 
     SetValue(value){
         if(value <= this.value){
