@@ -7,7 +7,6 @@
                 {{ data }}
             </div>
         </div>
-        <button>Сохранить</button>
     </div>
 </template>
 

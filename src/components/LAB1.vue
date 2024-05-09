@@ -85,6 +85,7 @@ export default {
     flex: 1;
   }
   .TreeDiv{
+    overflow: auto;
     flex: 2
   }
 }
