@@ -1,7 +1,6 @@
 <template>
   <div>
   <canvas ref="chart"></canvas>
-
   </div>
 </template>
 
@@ -43,8 +42,13 @@ export default {
     }
   },
   mounted (){
-      
-    this.renderChart();
+    console.log("gfrdgrggdd")
+    try {
+      this.renderChart();
+    } catch (error) {
+      console.log(error)
+    }
+    
   },
   methods:{
     renderChart() {

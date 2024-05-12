@@ -1,6 +1,7 @@
 <template>
     <div class="GetData">
         <div>
+        <div @click="console.log(data_array)">log</div>
         <input 
             type="file"
             accept=".dataArray" 
@@ -9,7 +10,7 @@
         </div>
         <div class="divList">
             <ul>
-                <li v-for="data, index in dataGET"
+                <li v-for="data, index in data_array.arrayData"
                     :key="index"
                 >
                     {{ index }} 
@@ -27,9 +28,6 @@
                 <button @click="Add50RandomEl">
                     Добавить 50 случайных элементов от -100 до 100
                 </button>
-                <button  @click="SaveChange">
-                    Сохранить
-                </button>
             </div>
         </div>
     </div>
@@ -40,51 +38,57 @@ export default{
     name: "GetFile",
     data(){
         return{
-            dataGET: [],
+            dataGET: {},
             editing: false
         }
     },
+    props: {
+        data_array: {
+            type: Object,
+        },
+    },
     methods:{
         PostData() {
-            this.$emit('GetArray', {
-            data: this.dataGET
-            })
+            this.$emit('GetArray', this.dataGET)
         },
         Get_Data(e){
+            this.dataGET = this.data_array
             const reader = new FileReader();
             reader.readAsText(e.target.files[0]);
             reader.addEventListener('load', (dataF) => {
                 dataF.target.result.split(',').forEach(element => {
-                    this.dataGET.push(Number(element))
+                    this.dataGET.arrayData.push(Number(element))
                 });
                 //console.log(this.dataGET[0])
                 this.PostData()
             });
             
         },
-        SaveChange(){
-            this.editing = false
+        DelateRow(index){
+            this.dataGET = this.data_array
+            this.dataGET.arrayData.splice(index, 1);
             this.PostData()
         },
-        DelateRow(index){
-            this.dataGET.splice(index, 1);
-        },
         AddRow(){
-            this.dataGET.push(0)
+            this.dataGET = this.data_array
+            this.dataGET.arrayData.push(0)
+            this.PostData()
         },
-        ChangeaDta(e){
-            this.dataGET[e.target.id] = e.target.value
-            //console.log(e.target.value, this.dataGET[e.target.id])
+        ChangeData(e){
+            this.dataGET = this.data_array
+            this.dataGET.arrayData[e.target.id] = Number(e.target.value) 
+            this.PostData()
         },
         Add50RandomEl(){
+            this.dataGET = this.data_array
             function randomNumber(min, max) {
                 return Math.floor(Math.random() * (max - min) + min);
             }
             
             for (let index = 0; index < 50; index++) {
-                this.dataGET.push(randomNumber(1, 200) - 100)
-                
+                this.dataGET.arrayData.push(randomNumber(1, 200) - 100)
             }
+            this.PostData()
         }
     }
 }
