@@ -3,8 +3,8 @@
         <div>
             <button @click="Get_Data"> Запросить данные </button>
         </div>
-        <div>
-            <div
+        <div class="Datalist">
+            <div class="DataItem"
                 v-for="data, index in dataJson"
                 :key="index"
                 
@@ -24,7 +24,7 @@ export default{
         }
     },
     methods:{
-        PostData(select_data) {
+        PostData(select_data) { 
             this.$emit('GetArray', select_data)
         },
         async Get_Data(e){
@@ -62,9 +62,6 @@ export default{
                 this.timefetch = "Error";
                 console.error('Error approve:', error);
             }
-           
-            
-
         },
         DelateRow(index){
             this.dataGET.splice(index, 1);
@@ -92,6 +89,22 @@ export default{
 
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+.Datalist{
+    padding: 25px;
+    .DataItem{
+        display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid black;
+
+    button{
+        background: none;
+        margin: 5px;
+    }
+    }
+    
+}
 
 </style>

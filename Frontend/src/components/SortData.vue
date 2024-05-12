@@ -1,5 +1,6 @@
 <template>
     <div class="SortData">
+        Отсортированный массив
         <div class="divList">
             <div v-for="data, index in dataGET"
                 :key="index"

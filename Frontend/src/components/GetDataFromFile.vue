@@ -1,7 +1,6 @@
 <template>
     <div class="GetData">
         <div>
-        <div @click="console.log(data_array)">log</div>
         <input 
             type="file"
             accept=".dataArray" 
@@ -9,22 +8,20 @@
             />
         </div>
         <div class="divList">
-            <ul>
-                <li v-for="data, index in data_array.arrayData"
+                <div v-for="data, index in data_array.arrayData"
                     :key="index"
                 >
                     {{ index }} 
                     <input type="number" @change="ChangeData" :id="index" :value="data" :class="editing ? 'active' : ''">
                     <button v-if="editing" @click="DelateRow(index)">-</button>
-                </li>
-                <li v-if="editing" @click="AddRow"> Добавить</li>
-            </ul>
+            </div>
         </div>
         <div>
             <button v-if="!editing" @click="editing = !editing">
                 Редактировать
             </button>
             <div v-else>
+                <div v-if="editing" @click="AddRow"> <button>Добавить</button></div>
                 <button @click="Add50RandomEl">
                     Добавить 50 случайных элементов от -100 до 100
                 </button>
@@ -59,7 +56,6 @@ export default{
                 dataF.target.result.split(',').forEach(element => {
                     this.dataGET.arrayData.push(Number(element))
                 });
-                //console.log(this.dataGET[0])
                 this.PostData()
             });
             
@@ -108,22 +104,27 @@ export default{
     align-items: center;
 
     .divList{
-        display: inline-block;
+        display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 20px;
         max-height: 70vh;
         overflow-y: auto;
+        margin-bottom: 15px;
+        
 
-        ul{
-            list-style-type: none;
             
-            li{
-                padding: 10px;
+            div{
+                display: flex;
+                padding: 6px;
                 border: 1px solid black;
                 border-radius: 14px;
                 background-color: darkgray;
 
                 input{
-                    
+                    width: 60px;
                     pointer-events:none;
+                    margin: 0px 5px 0px 5px;
                     background: none;
                     border: none;
 
@@ -133,7 +134,6 @@ export default{
                     }
                 }
             }
-        }
     }
 }
 </style>

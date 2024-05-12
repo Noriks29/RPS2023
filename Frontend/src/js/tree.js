@@ -29,7 +29,7 @@ export class Tree{
 
         if(this.rightTree !== undefined)
             array = array.concat(this.rightTree.GetValue())
-        console.log(array)
+        //console.log(array)
         return array
 
     }
